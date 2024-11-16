@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Group, Artifact, and Version Information -->
+    <groupId>auis.se355.protobuf</groupId>
+    <artifactId>se421_guice</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>se355_protobuf</name>
+    <description>Example project using Protobuf</description>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.21.12</version>
+        </dependency>
+        <!-- Add more dependencies here as needed -->
+    </dependencies>
+
+    <!-- Build Configuration -->
+    <build>
+        <plugins>
+            <!-- Protobuf Maven Plugin Configuration -->
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <executions>
+                    <!-- Standard Protobuf Compilation -->
+                    <execution>
+                        <id>compile</id>
+                        <phase>generate-sources</phase> <!-- Moved to 'generate-sources' phase for best practices -->
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <protoSourceRoot>src/main/proto</protoSourceRoot> <!-- Specify proto file directory here -->
+                        </configuration>
+                    </execution>
+
+                    <!-- Compile Custom Protobufs (e.g., gRPC specific files) -->
+                    <execution>
+                        <id>compile-custom</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>compile-custom</goal>
+                        </goals>
+                        <configuration>
+                            <pluginId>grpc-java</pluginId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
